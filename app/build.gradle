@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'cn.nastv.subtitles'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'cn.nastv.subtitles'
+        minSdk 28
+        targetSdk 34
+        versionCode 7
+        versionName '1.5'
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packaging {
+        resources {
+            excludes += ['META-INF/versions/**', 'META-INF/INDEX.LIST']
+        }
+    }
+}
+
+dependencies {
+    implementation('me.zhanghai.android.libarchive:library:1.1.6') {
+        // Its AndroidX dependency consists only of API annotations.
+        exclude group: 'androidx.annotation', module: 'annotation'
+    }
+    implementation 'com.hierynomus:smbj:0.14.0'
+    implementation('com.rapid7.client:dcerpc:0.12.13') {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    implementation 'com.google.guava:guava:33.4.0-android'
+    implementation 'org.jsoup:jsoup:1.24.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs_nio:2.1.5'
+}
